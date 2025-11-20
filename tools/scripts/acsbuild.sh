@@ -1,5 +1,5 @@
 ## @file
-#  Copyright (c) 2025, Arm Limited or its affiliates. All rights reserved.
+#  Copyright (c) 2025-2026, Arm Limited or its affiliates. All rights reserved.
 #  SPDX-License-Identifier : Apache-2.0
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,13 +22,14 @@ then
     return 0
 fi
 
+DSC_PATH=${RME_ACS_DSC:-ShellPkg/Application/rme-acs/uefi_app/RmeAcs.dsc}
+
 if [ "$1" == "ENABLE_OOB" ]; then
-    build -a AARCH64 -t GCC49 -p ShellPkg/ShellPkg.dsc \
+    build -a AARCH64 -t GCC49 -p ${DSC_PATH} \
             -m ShellPkg/Application/rme-acs/baremetal_app/RmeAcs.inf -D ENABLE_OOB
     return 0;
 fi
 
-    build -a AARCH64 -t GCC49 -p ShellPkg/ShellPkg.dsc \
+    build -a AARCH64 -t GCC49 -p ${DSC_PATH} -n 32 \
         -m ShellPkg/Application/rme-acs/uefi_app/RmeAcs.inf
-
 

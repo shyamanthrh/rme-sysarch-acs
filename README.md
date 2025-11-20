@@ -59,7 +59,7 @@ For more information, see [arm RME System ACS Validation Methodology document](D
    - platform/pal_baremetal/FVP/include/platform_override_fvp.h -> For Bare-metal platform,
    - platform/pal_uefi/include/platform_overrride.h -> For UEFI platform.
 - Any mainstream Linux based OS distribution running on a x86 or aarch64 machine.
-- git clone --branch edk2-stable202208 --depth 1 https://github.com/tianocore/edk2
+- git clone --branch edk2-stable202505 --depth 1 https://github.com/tianocore/edk2
 - git clone https://github.com/tianocore/edk2-libc [ Checkout SHA: 61687168fe02ac4d933a36c9145fdd242ac424d1]
 - Install GCC 13.2 or later toolchain for Linux from [here](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
 - Install the build prerequisite packages to build EDK2.
@@ -71,10 +71,6 @@ To start the ACS build, perform the following steps:
 2.  git clone https://github.com/tianocore/edk2-libc
 3.  git submodule update --init --recursive
 4.  git clone https://github.com/ARM-software/rme-sysarch-acs ShellPkg/Application/rme-acs
-5.  Add the following to the [LibraryClasses.common] section in ShellPkg/ShellPkg.dsc
-   - Add  RmeValLib|ShellPkg/Application/rme-acs/val/RmeValLib.inf
-   - Add  RmePalLib|ShellPkg/Application/rme-acs/platform/pal_uefi/RmePalLib.inf
-   - Add ShellPkg/Application/rme-acs/uefi_app/RmeAcs.inf in the [components] section of ShellPkg/ShellPkg.dsc <br>
 
 ### Linux build environment
 If the build environment is Linux, perform the following steps:
@@ -87,7 +83,7 @@ If the build environment is Linux, perform the following steps:
 
 ### Build output
 
-The EFI executable file is generated at <edk2_path>/Build/Shell/DEBUG_GCC49/AARCH64/Rme.efi
+The EFI executable file is generated at <edk2_path>/Build/RmeAcs/DEBUG_GCC49/AARCH64/Rme.efi
 
 
 ## Test suite execution

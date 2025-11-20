@@ -1,0 +1,16 @@
+## @file
+#  Package description for the RME ACS external integrations.
+#
+#  Copyright (c) 2026, Arm Limited.
+#  SPDX-License-Identifier: Apache-2.0
+#
+##
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = RmeAcs
+  PACKAGE_GUID                   = 1E4A4AAC-0862-4789-A2C1-6272F63413E0
+  PACKAGE_VERSION                = 0.1
+
+[Includes]
+  ../val/include
