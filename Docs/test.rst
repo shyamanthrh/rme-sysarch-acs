@@ -12,7 +12,7 @@ Results
 -------
 
 .. csv-table:: PCIe Devices
-   :file: test.csv
+   :file: Test.csv
    :header-rows: 1
 
 Additional Information
