@@ -11,9 +11,8 @@ The following devices were detected during enumeration.
 Results
 -------
 
-.. csv-table:: PCIe Devices
-   :file: Test.csv
-   :header-rows: 1
+.. BEGIN GENERATED RESULTS
+.. END GENERATED RESULTS
 
 Additional Information
 ----------------------

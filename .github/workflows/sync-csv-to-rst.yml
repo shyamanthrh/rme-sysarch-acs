@@ -1,0 +1,82 @@
+name: Sync CSV to RST
+
+on:
+  push:
+    branches:
+      - test-csv
+    paths:
+      - "Docs/Test.csv"
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout test-csv branch
+        uses: actions/checkout@v7
+        with:
+          ref: test-csv
+
+      - name: Generate RST table from CSV
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          CSV_FILE = Path("Docs/Test.csv")
+          RST_FILE = Path("Docs/test.rst")
+
+          START = ".. BEGIN GENERATED RESULTS"
+          END = ".. END GENERATED RESULTS"
+
+          # Read the CSV
+          csv_text = CSV_FILE.read_text(encoding="utf-8").strip()
+
+          # Indent CSV so it becomes inline content of csv-table
+          indented_csv = "\n".join(
+              "   " + line for line in csv_text.splitlines()
+          )
+
+          generated = (
+              f"{START}\n\n"
+              ".. csv-table:: Test Results\n"
+              "   :header-rows: 1\n\n"
+              f"{indented_csv}\n\n"
+              f"{END}"
+          )
+
+          rst = RST_FILE.read_text(encoding="utf-8")
+
+          if START not in rst:
+              raise SystemExit(
+                  f"ERROR: {START} not found in {RST_FILE}"
+              )
+
+          if END not in rst:
+              raise SystemExit(
+                  f"ERROR: {END} not found in {RST_FILE}"
+              )
+
+          before, rest = rst.split(START, 1)
+          _, after = rest.split(END, 1)
+
+          new_rst = before + generated + after
+
+          RST_FILE.write_text(new_rst, encoding="utf-8")
+          PY
+
+      - name: Commit updated RST
+        run: |
+          if git diff --quiet -- Docs/test.rst; then
+            echo "Docs/test.rst is already up to date"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add Docs/test.rst
+          git commit -m "docs: update test results from CSV"
+          git push origin HEAD:test-csv
