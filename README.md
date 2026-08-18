@@ -34,6 +34,8 @@ Most of the tests are executed from UEFI Shell by executing the RME UEFI shell a
   - To get the latest version of the code with bug fixes and new features, use the master branch.
 
 ## Additional reading
+  - For PCIe and CXL exerciser requirements, see the [RME System ACS Exerciser requirements](Docs/Exerciser.md).
+  - For details on porting the exerciser PAL APIs, see the [RME System ACS Exerciser API porting guide](Docs/Exerciser_API_porting_guide.md).
   - For information about the implementable RME rules test algorithm and for unimplemented RME rules, see [arm RME System ACS Scenario document](Docs/Arm_RME_System_Architecture_Compliance_Suite_Scenario_Document.rst)
   - For details on the RME System ACS UEFI Shell Application, see [arm RME System ACS Porting guide document](Docs/Arm_RME_System_ACS_Platform_porting_guide.rst).
   - For details on the Design of the RME System ACS, see. the [arm RME System ACS Validation Methodology document](Docs/Arm_RME_System_Architecture_Compliance_Suite_Validation_Methodology.pdf)
