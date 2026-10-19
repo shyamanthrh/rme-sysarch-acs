@@ -1,5 +1,5 @@
 /** @file
- * Copyright (c) 2025, Arm Limited or its affiliates. All rights reserved.
+ * Copyright (c) 2025-2026, Arm Limited or its affiliates. All rights reserved.
  * SPDX-License-Identifier : Apache-2.0
 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -136,7 +136,7 @@ typedef struct {
 } memory_region_descriptor_t;
 
 void val_el3_setup_acs_pgt_values(void);
-void val_el3_add_gpt_entry(uint64_t arg0, uint64_t arg1);
+uint32_t val_el3_add_gpt_entry(uint64_t arg0, uint64_t arg1);
 uint64_t val_el3_get_gpt_index(uint64_t pa, uint8_t level, uint8_t l0gptsz,
                        uint8_t pps, uint8_t p);
 bool val_el3_is_gpi_valid(uint64_t gpi);

@@ -61,8 +61,16 @@ uintptr_t plat_arm_acs_smc_handler(unsigned int smc_fid, uint64_t services,
       break;
     case RME_ADD_GPT_ENTRY:
       INFO("RME GPT mapping service \n");
-      val_el3_add_gpt_entry(arg0, arg1);
-      val_el3_tlbi_paallos();
+      if (val_el3_add_gpt_entry(arg0, arg1) == 0) {
+          val_el3_tlbi_paallos();
+      } else {
+          shared_data->status_code = 1;
+          const char *msg = "EL3: GPT entry addition failed";
+          int i = 0; while (msg[i] && i < sizeof(shared_data->error_msg) - 1) {
+              shared_data->error_msg[i] = msg[i]; i++;
+          }
+          shared_data->error_msg[i] = '\0';
+      }
       break;
     case RME_ADD_MMU_ENTRY:
       INFO("RME MMU mapping service \n");
